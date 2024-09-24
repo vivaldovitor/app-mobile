@@ -17,12 +17,15 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Saúde Humana</ThemedText>
       </ThemedView>
       <ThemedText>
-        Nessa aba, você aprenderá sobre a importância de manter a saúde física e mental no seu dia-a-dia. A saúde física e mental são importantes porque contribuem para a qualidade de vida e o bem-estar geral das pessoas. A saúde não se limita à ausência de doenças, mas sim a um equilíbrio entre os aspectos físicos, mentais e sociais. A saúde mental e física estão interligadas e podem influenciar uma na outra. 
+        Nessa aba, você aprenderá sobre a importância de manter a saúde física e mental no seu dia-a-dia. A saúde física e mental são importantes porque contribuem para a qualidade de vida e o bem-estar geral das pessoas. A saúde não se limita à ausência de doenças, mas sim a um equilíbrio entre os aspectos físicos, mentais e sociais. A saúde mental e física estão interligadas e podem influenciar uma na outra.
         Por exemplo, a depressão pode causar sintomas físicos como perda ou ganho de peso, fadiga, perda de energia, excesso de sono ou insônia. Já a ansiedade pode causar sensação de desmaio, sudorese, taquicardia e tremores.
       </ThemedText>
 
       {/* Primeira seção */}
       <Collapsible title="Melhoria e capacidade cognitiva">
+        <Image
+          source={require('@/assets/images/image_section01.webp')}
+        />
         <ThemedText>
           A atividade física pode melhorar a capacidade mental de diversas formas, incluindo:
         </ThemedText>
@@ -38,11 +41,13 @@ export default function TabTwoScreen() {
         <ExternalLink href="https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-exercitar/noticias/2022/como-a-atividade-fisica-protege-o-cerebro">
           <ThemedText type="link">Confira mais no Ministério da Saúde</ThemedText>
         </ExternalLink>
-        
       </Collapsible>
 
       {/* Segunda seção */}
       <Collapsible title="Diminui os níveis de ansiedade e estresse">
+        <Image
+          source={require('@/assets/images/image_section02.jpg')}
+        />
         <ThemedText>
           A prática regular de exercícios físicos ajuda a reduzir os níveis de cortisol, o hormônio do estresse, e promove o relaxamento. Exercícios como caminhada, corrida leve, yoga e atividades ao ar livre têm se mostrado eficazes na redução da ansiedade e do estresse.
         </ThemedText>
@@ -55,11 +60,14 @@ export default function TabTwoScreen() {
         <ExternalLink href="https://vidasaudavel.einstein.br/como-diminuir-o-estresse/">
           <ThemedText type="link">Saiba mais sobre como combater o estresse</ThemedText>
         </ExternalLink>
-        
+
       </Collapsible>
 
       {/* Terceira seção */}
       <Collapsible title="Contribui para melhorar a autoestima, o autoconceito e a imagem corporal">
+        <Image
+          source={require('@/assets/images/image_section03.jpg')}
+        />
         <ThemedText>
           A prática de atividades físicas está associada à melhoria da autoestima, do autoconceito e da percepção da imagem corporal. Isso é importante para a saúde mental, pois o exercício regular melhora a confiança em si mesmo e a percepção de bem-estar físico.
         </ThemedText>
@@ -72,11 +80,14 @@ export default function TabTwoScreen() {
         <ExternalLink href="https://www.psicologo.com.br/blog/autoestima-e-imagem-corporal/#:~:text=Uma%20pessoa%20satisfeita%20com%20a,do%20psic%C3%B3logo%20ajudar%20as%20pessoas.">
           <ThemedText type="link">Leia mais sobre autoestima e imagem corporal</ThemedText>
         </ExternalLink>
-        
+
       </Collapsible>
 
       {/* Quarta seção */}
       <Collapsible title="Aumenta a produção de serotonina, o hormônio responsável pela sensação de bem-estar">
+      <Image
+          source={require('@/assets/images/image_section04.webp')}
+        />
         <ThemedText>
           Exercícios físicos aumentam a produção de serotonina, um neurotransmissor que desempenha um papel importante na regulação do humor e do bem-estar. Níveis adequados de serotonina no cérebro podem reduzir os sintomas de depressão e melhorar o humor de maneira geral.
         </ThemedText>
@@ -93,7 +104,7 @@ export default function TabTwoScreen() {
             </ThemedText>
           ),
         })}
-        
+
       </Collapsible>
     </ParallaxScrollView>
   );
