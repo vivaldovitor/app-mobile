@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Platform } from 'react-native';
-
+import { Pressable, Text } from 'react-native';
+import { Link } from 'expo-router';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -46,6 +47,19 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+
+      <Link href="/detals" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Detals</Text>
+      </Pressable>
+      </Link>
+
+    <Link href="/explore" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Explore</Text>
+      </Pressable>
+    </Link>
+
     </ParallaxScrollView>
   );
 }
@@ -66,5 +80,24 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  pressable: {
+    backgroundColor: '#1E90FF', 
+    paddingVertical: 12, 
+    paddingHorizontal: 20, 
+    borderRadius: 8, 
+    alignItems: 'flex-start', 
+    justifyContent: 'center', 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.25, 
+    shadowRadius: 3.84, 
+    elevation: 5, 
+    alignSelf: 'flex-start', 
+  },
+  pressableText: {
+    color: '#FFFFFF', 
+    fontSize: 16, 
+    fontWeight: 'bold', 
   },
 });

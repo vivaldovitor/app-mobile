@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Image, Platform } from 'react-native';
-
+import { Pressable, Text } from 'react-native';
+import { Link } from 'expo-router';
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -84,6 +85,19 @@ export default function TabTwoScreen() {
           ),
         })}
       </Collapsible>
+
+      <Link href="/detals" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Detals</Text>
+      </Pressable>
+      </Link>
+
+    <Link href="/" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Index</Text>
+      </Pressable>
+    </Link>
+
     </ParallaxScrollView>
   );
 }
@@ -98,5 +112,24 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  pressable: {
+    backgroundColor: '#1E90FF', // Azul
+    paddingVertical: 12, // Padding vertical
+    paddingHorizontal: 20, // Padding horizontal
+    borderRadius: 8, // Bordas arredondadas
+    alignItems: 'flex-start', // Alinha o texto ao lado esquerdo
+    justifyContent: 'center', // Centraliza o conteúdo verticalmente
+    shadowColor: '#000', // Cor da sombra
+    shadowOffset: { width: 0, height: 2 }, // Deslocamento da sombra
+    shadowOpacity: 0.25, // Opacidade da sombra
+    shadowRadius: 3.84, // Raio da sombra
+    elevation: 5, // Sombras no Android
+    alignSelf: 'flex-start', // Alinha o Pressable ao lado esquerdo da tela
+  },
+  pressableText: {
+    color: '#FFFFFF', // Cor do texto branco
+    fontSize: 16, // Tamanho da fonte
+    fontWeight: 'bold', // Negrito
   },
 });

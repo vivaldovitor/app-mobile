@@ -1,14 +1,43 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Image, Platform, View } from 'react-native';
-
+import { useEffect, useState } from 'react';
+import { Pressable, Text } from 'react-native';
+import { Link } from 'expo-router';
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import * as Location from 'expo-location';
 
 
-export default function TabTwoScreen() {
+
+export default function TabThreeScreen() {
+
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [errorMsg, setErrorMsg] = useState<String | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text: string = 'Waiting..';
+  if (errorMsg) {
+    let text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#6495ED' }}
@@ -106,6 +135,23 @@ export default function TabTwoScreen() {
         })}
 
       </Collapsible>
+
+      <Link href="/explore" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Explore</Text>
+      </Pressable>
+      </Link>
+
+    <Link href="/" asChild>
+      <Pressable style={styles.pressable}>
+        <Text style={styles.pressableText}>Index</Text>
+      </Pressable>
+    </Link>
+
+    <View style={styles.container}>
+      <Text style={styles.paragraph}>{text}</Text>
+    </View>
+
     </ParallaxScrollView>
   );
 }
@@ -120,5 +166,38 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  pressable: {
+    backgroundColor: '#1E90FF', 
+    paddingVertical: 12, 
+    paddingHorizontal: 20, 
+    borderRadius: 8, 
+    alignItems: 'flex-start', 
+    justifyContent: 'center', 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.25, 
+    shadowRadius: 3.84, 
+    elevation: 5, 
+    alignSelf: 'flex-start', 
+  },
+  pressableText: {
+    color: '#FFFFFF', 
+    fontSize: 16, 
+    fontWeight: 'bold', 
+  },
+   container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#F0F8FF'
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#333',
+    marginVertical: 10,
+    lineHeight: 24,
   },
 });
