@@ -86,6 +86,8 @@ export default function TabTwoScreen() {
         })}
       </Collapsible>
 
+      {/* Links de navegação */}
+
       <Link href="/detals" asChild>
       <Pressable style={styles.pressable}>
         <Text style={styles.pressableText}>Detals</Text>

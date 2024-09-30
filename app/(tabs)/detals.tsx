@@ -8,46 +8,52 @@ import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import * as Location from 'expo-location';
-
-
+import * as Location from 'expo-location'; // Biblioteca para obter a localização do usuário
 
 export default function TabThreeScreen() {
 
+  // Hooks de estado para armazenar a localização do usuário e possíveis mensagens de erro
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<String | null>(null);
 
+  // useEffect para solicitar permissão de localização e obter a posição atual do usuário
   useEffect(() => {
     (async () => {
-      
+      // Solicita a permissão para acessar a localização do usuário
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
+        //Se a permissão não seja concedida, define uma mensagem de erro
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
+      // E se a permissão for concedida pega a posição atual do usuário
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);
 
+  // O "Waiting" é exibido enquanto a localização é carregada ou se ocorrer algum erro
   let text: string = 'Waiting..';
   if (errorMsg) {
-    let text = errorMsg;
+    let text = errorMsg; // Define o texto como a mensagem de erro, se houver
   } else if (location) {
-    text = JSON.stringify(location);
+    text = JSON.stringify(location); // Converte o objeto de localização para uma string 
   }
-
+  
   return (
+    // Componente customizado com efeito parallax no scroll
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#6495ED' }}
       headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
+
+      {/* Título da página */}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Saúde Humana</ThemedText>
       </ThemedView>
+
+      {/* Texto introdutório sobre a importância da saúde física e mental */}
       <ThemedText>
-        Nessa aba, você aprenderá sobre a importância de manter a saúde física e mental no seu dia-a-dia. A saúde física e mental são importantes porque contribuem para a qualidade de vida e o bem-estar geral das pessoas. A saúde não se limita à ausência de doenças, mas sim a um equilíbrio entre os aspectos físicos, mentais e sociais. A saúde mental e física estão interligadas e podem influenciar uma na outra.
-        Por exemplo, a depressão pode causar sintomas físicos como perda ou ganho de peso, fadiga, perda de energia, excesso de sono ou insônia. Já a ansiedade pode causar sensação de desmaio, sudorese, taquicardia e tremores.
+        Nessa aba, você aprenderá sobre a importância de manter a saúde física e mental no seu dia-a-dia...
       </ThemedText>
 
       {/* Primeira seção */}
@@ -56,106 +62,83 @@ export default function TabThreeScreen() {
           source={require('@/assets/images/image_section01.webp')}
         />
         <ThemedText>
-          A atividade física pode melhorar a capacidade mental de diversas formas, incluindo:
-        </ThemedText>
-        <ThemedText>
-          - Aumento de neurotransmissores: A atividade física aumenta a produção e liberação de neurotransmissores, que regulam funções como a memória, aprendizagem, emoções, ansiedade e humor.
-        </ThemedText>
-        <ThemedText>
-          - Redução do estresse: O exercício físico reduz os níveis de hormônios do estresse e estimula a produção de endorfinas, que são hormônios naturais que geram bom humor e deixam a pessoa mais relaxada.
-        </ThemedText>
-        <ThemedText>
-          - Alívio da ansiedade: A atividade física pode ajudar a aliviar a ansiedade ao melhorar o fluxo sanguíneo para o cérebro e liberar substâncias que promovem a sensação de calma.
+          A atividade física pode melhorar a capacidade mental de diversas formas, incluindo...
         </ThemedText>
         <ExternalLink href="https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-exercitar/noticias/2022/como-a-atividade-fisica-protege-o-cerebro">
           <ThemedText type="link">Confira mais no Ministério da Saúde</ThemedText>
         </ExternalLink>
       </Collapsible>
 
-      {/* Segunda seção */}
+      {/* Segunda seção  */}
       <Collapsible title="Diminui os níveis de ansiedade e estresse">
         <Image
           source={require('@/assets/images/image_section02.jpg')}
         />
         <ThemedText>
-          A prática regular de exercícios físicos ajuda a reduzir os níveis de cortisol, o hormônio do estresse, e promove o relaxamento. Exercícios como caminhada, corrida leve, yoga e atividades ao ar livre têm se mostrado eficazes na redução da ansiedade e do estresse.
-        </ThemedText>
-        <ThemedText>
-          - Caminhadas diárias, mesmo de curta duração, podem reduzir significativamente os níveis de estresse.
-        </ThemedText>
-        <ThemedText>
-          - Práticas como yoga e meditação também são altamente recomendadas para aliviar a tensão mental e corporal.
+          A prática regular de exercícios físicos ajuda a reduzir os níveis de cortisol...
         </ThemedText>
         <ExternalLink href="https://vidasaudavel.einstein.br/como-diminuir-o-estresse/">
           <ThemedText type="link">Saiba mais sobre como combater o estresse</ThemedText>
         </ExternalLink>
-
       </Collapsible>
 
-      {/* Terceira seção */}
+      {/* Terceira seção  */}
       <Collapsible title="Contribui para melhorar a autoestima, o autoconceito e a imagem corporal">
         <Image
           source={require('@/assets/images/image_section03.jpg')}
         />
         <ThemedText>
-          A prática de atividades físicas está associada à melhoria da autoestima, do autoconceito e da percepção da imagem corporal. Isso é importante para a saúde mental, pois o exercício regular melhora a confiança em si mesmo e a percepção de bem-estar físico.
+          A prática de atividades físicas está associada à melhoria da autoestima...
         </ThemedText>
-        <ThemedText>
-          - A atividade física pode melhorar a percepção da própria imagem corporal, tornando a pessoa mais confiante.
-        </ThemedText>
-        <ThemedText>
-          - Ao atingir metas físicas, como completar uma corrida ou aumentar a força, a sensação de realização e autovalorização aumenta.
-        </ThemedText>
-        <ExternalLink href="https://www.psicologo.com.br/blog/autoestima-e-imagem-corporal/#:~:text=Uma%20pessoa%20satisfeita%20com%20a,do%20psic%C3%B3logo%20ajudar%20as%20pessoas.">
+        <ExternalLink href="https://www.psicologo.com.br/blog/autoestima-e-imagem-corporal/#:~:text=Uma%20pessoa%20satisfeita%20com%20a...">
           <ThemedText type="link">Leia mais sobre autoestima e imagem corporal</ThemedText>
         </ExternalLink>
-
       </Collapsible>
 
       {/* Quarta seção */}
       <Collapsible title="Aumenta a produção de serotonina, o hormônio responsável pela sensação de bem-estar">
-      <Image
+        <Image
           source={require('@/assets/images/image_section04.webp')}
         />
         <ThemedText>
-          Exercícios físicos aumentam a produção de serotonina, um neurotransmissor que desempenha um papel importante na regulação do humor e do bem-estar. Níveis adequados de serotonina no cérebro podem reduzir os sintomas de depressão e melhorar o humor de maneira geral.
-        </ThemedText>
-        <ThemedText>
-          - A serotonina também ajuda a regular o sono, o apetite e a digestão, que são elementos fundamentais para o equilíbrio físico e mental.
+          Exercícios físicos aumentam a produção de serotonina...
         </ThemedText>
         <ExternalLink href="https://www.uol.com.br/vivabem/faq/serotonina-o-que-e-e-como-aumentar.htm">
           <ThemedText type="link">Veja mais sobre a importância da serotonina na saúde mental</ThemedText>
         </ExternalLink>
+        {/* Condicional para exibir texto específico no iOS */}
         {Platform.select({
           ios: (
             <ThemedText>
-              No iOS, você pode explorar mais sobre os benefícios da atividade física para o bem-estar mental.
+              No iOS, você pode explorar mais sobre os benefícios da atividade física...
             </ThemedText>
           ),
         })}
-
       </Collapsible>
 
+      {/* Links para navegação interna na aplicação */}
       <Link href="/explore" asChild>
-      <Pressable style={styles.pressable}>
-        <Text style={styles.pressableText}>Explore</Text>
-      </Pressable>
+        <Pressable style={styles.pressable}>
+          <Text style={styles.pressableText}>Explore</Text>
+        </Pressable>
       </Link>
 
-    <Link href="/" asChild>
-      <Pressable style={styles.pressable}>
-        <Text style={styles.pressableText}>Index</Text>
-      </Pressable>
-    </Link>
+      <Link href="/" asChild>
+        <Pressable style={styles.pressable}>
+          <Text style={styles.pressableText}>Index</Text>
+        </Pressable>
+      </Link>
 
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>{text}</Text>
-    </View>
+      {/* Exibe a localização ou mensagem de espera/erro */}
+      <View style={styles.container}>
+        <Text style={styles.paragraph}>{text}</Text>
+      </View>
 
     </ParallaxScrollView>
   );
 }
 
+// Estilos para o componente
 const styles = StyleSheet.create({
   headerImage: {
     color: '#808080',
@@ -168,25 +151,25 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   pressable: {
-    backgroundColor: '#1E90FF', 
-    paddingVertical: 12, 
-    paddingHorizontal: 20, 
-    borderRadius: 8, 
-    alignItems: 'flex-start', 
-    justifyContent: 'center', 
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.25, 
-    shadowRadius: 3.84, 
-    elevation: 5, 
-    alignSelf: 'flex-start', 
+    backgroundColor: '#1E90FF',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    alignSelf: 'flex-start',
   },
   pressableText: {
-    color: '#FFFFFF', 
-    fontSize: 16, 
-    fontWeight: 'bold', 
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-   container: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
